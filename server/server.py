@@ -4,6 +4,7 @@ import json
 import re
 import sys
 import txl_module
+import pickle
 js_info=open('log.json','r')
 l=json.loads(js_info.read())
 sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -14,28 +15,28 @@ connect,addr=sock.accept()
 while True:
     if __name__=='__main__':
         while True:
-            put_num=connect.recv(1024).decode()
+            put_num=pickle.loads(connect.recv(1024))
             if put_num=='4':
-                connect.send(txl_module.all_info.search_all(l).encode('utf-8'))
+                connect.send(pickle.dumps(txl_module.all_info.search_all(l)))
             if put_num=='1':
-                name=connect.recv(1024).decode()
-                age=connect.recv(1024).decode()
-                tel=connect.recv(1024).decode()
-                sex=connect.recv(1024).decode()
-                addr=connect.recv(1024).decode()
+                name=pickle.loads(connect.recv(1024))
+                age=pickle.loads(connect.recv(1024))
+                tel=pickle.loads(connect.recv(1024))
+                sex=pickle.loads(connect.recv(1024))
+                addr=pickle.loads(connect.recv(1024))
                 allinfo=[name,age,tel,sex,addr]
-                connect.send(txl_module.all_info.add_info(l,allinfo).encode('utf-8'))
+                connect.send(pickle.dumps(txl_module.all_info.add_info(l,allinfo)))
             if put_num=='2':
-                dell_info=connect.recv(1024).decode()
-                connect.send(txl_module.all_info.del_info(l,dell_info).encode('utf-8'))
+                dell_info=pickle.loads(connect.recv(1024))
+                connect.send(pickle.dumps(txl_module.all_info.del_info(l,dell_info)))
             if put_num=='3':
-                two_info=connect.recv(1024).decode()
-                connect.send(txl_module.all_info.to_search(l,two_info).encode('utf-8'))
+                two_info=pickle.loads(connect.recv(1024))
+                connect.send(pickle.dumps(txl_module.all_info.to_search(l,two_info)))
             if put_num=='5':
-                change=connect.recv(1024).decode()
-                connect.send(txl_module.all_info.xg_info(l,change).encode())
+                change=pickle.loads(connect.recv(1024))
+                connect.send(pickle.dumps(txl_module.all_info.xg_info(l,change)))
             if put_num=='6':
-                connect.send(txl_module.all_info.save_info(l).encode('utf-8'))
+                connect.send(pickle.dumps(txl_module.all_info.save_info(l)))
             if put_num=='7':
                 m_h=connect.recv(1024).decode()
-                connect.send(txl_module.all_info.re_ch(l,m_h).encode('ascii'))
+                connect.send(pickle.dumps(txl_module.all_info.re_ch(l,m_h)))
