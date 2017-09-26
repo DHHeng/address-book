@@ -19,12 +19,7 @@ while True:
             if put_num=='4':
                 connect.send(pickle.dumps(txl_module.all_info.search_all(l)))
             if put_num=='1':
-                name=pickle.loads(connect.recv(1024))
-                age=pickle.loads(connect.recv(1024))
-                tel=pickle.loads(connect.recv(1024))
-                sex=pickle.loads(connect.recv(1024))
-                addr=pickle.loads(connect.recv(1024))
-                allinfo=[name,age,tel,sex,addr]
+                allinfo=pickle.loads(connect.recv(11111))
                 connect.send(pickle.dumps(txl_module.all_info.add_info(l,allinfo)))
             if put_num=='2':
                 dell_info=pickle.loads(connect.recv(1024))
