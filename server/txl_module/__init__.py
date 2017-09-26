@@ -13,8 +13,7 @@ class all_info(object):
         all_data=json.dumps(self,ensure_ascii=False)
         return all_data
     def add_info(self,c_put):
-        txl_info={'name':c_put[0],'age':c_put[1],'tel':c_put[2],'sex':c_put[3],'addr':c_put[4]}
-        self.append(txl_info)
+        self.append(c_put)
         finally_reason='添加成功'
         return finally_reason
     def del_info(self,re_info):

@@ -18,12 +18,7 @@ while True:
             if put_num=='4':
                 connect.send(txl_module.all_info.search_all(l).encode('utf-8'))
             if put_num=='1':
-                name=connect.recv(1024).decode()
-                age=connect.recv(1024).decode()
-                tel=connect.recv(1024).decode()
-                sex=connect.recv(1024).decode()
-                addr=connect.recv(1024).decode()
-                allinfo=[name,age,tel,sex,addr]
+                allinfo=connect.recv(1024).decode()
                 connect.send(txl_module.all_info.add_info(l,allinfo).encode('utf-8'))
             if put_num=='2':
                 dell_info=connect.recv(1024).decode()
